@@ -1,0 +1,11 @@
+# Ignore sensitive files
+.env
+secrets.json
+config/
+
+# Ignore node_modules for Node.js projects
+node_modules/
+
+# Ignore Python cache
+__pycache__/
+*.pyc

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Store</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vehicle.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('vehicle') }}">Vehicles</a>
+            <a href="{{ url_for('about') }}">About & Help</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search by make, model...">
+            <select id="makeFilter">
+                <option value="">All Makes</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Ford">Ford</option>
+            </select>
+            <select id="priceFilter">
+                <option value="">All Prices</option>
+                <option value="0-10000">$0 - $10,000</option>
+                <option value="10000-20000">$10,000 - $20,000</option>
+                <option value="20000-30000">$20,000 - $30,000</option>
+                <option value="30000+">$30,000+</option>
+            </select>
+            <select id="yearFilter">
+                <option value="">All Years</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+            </select>
+            <select id="fuelFilter">
+                <option value="">All Fuel Types</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Gasoline">Gasoline</option>
+            </select>
+            <select id="typeFilter">
+                <option value="">All Types</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="4x4">4x4</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Coupe">Coupe</option>
+            </select>
+        </div>
+
+        <div class="car-grid" id="carGrid">
+            <!-- Car cards will be dynamically added here -->
+        </div>
+    </div>
+<!-- Chat Button -->
+<div id="chatButton" class="chat-button">
+    <button onclick="toggleChatWindow()">💬</button>
+</div>
+
+<!-- Chat Window (Hidden by Default) -->
+<div id="chatWindow" class="chat-window">
+    <div class="chat-header">
+        <span>Chat with Us</span>
+        <button onclick="toggleChatWindow()">X</button>
+    </div>
+    <div id="chatBody" class="chat-body">
+        <!-- Predefined questions will be displayed here -->
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+
+
+
+    <script src="{{ url_for('static', filename='js/vehicle.js') }}"></script>
+    
+</body>
+</html>

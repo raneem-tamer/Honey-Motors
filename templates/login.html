@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Home | Honey Motors</title>
+</head>
+<body>
+    <div class="home-container">
+        <h1>Welcome to Honey Motors!</h1>
+        <p>Select your portal to continue:</p>
+        <div class="navigation-buttons">
+            <a href="{{ url_for('home') }}" class="home-btn">Home</a>
+            
+            <a href="{{ url_for('user_login') }}" class="home-btn">User Login</a>
+            <a href="{{ url_for('admin_login') }}" class="home-btn">Admin Login</a>
+            <a href="{{ url_for('salesperson_login') }}" class="home-btn">Salesperson Login</a>
+            <a href="{{ url_for('user_signup') }}" class="home-btn">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>User Login | Honey Motors</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in">
+            <form action="/user-login" method="POST">
+                <h1>Sign In Using</h1>
+                <div class="social-icons">
+                    <a href="https://www.google.com" class="icon" target="_blank"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="https://www.facebook.com" class="icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://github.com" class="icon" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com" class="icon" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>OR use your email and password to sign-in</span>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Password" name="password" required>
+                <a href="#" id="forgotPasswordLink">Forgot Your Password?</a>
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+
+        <div id="forgotPasswordModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Reset Your Password</h2>
+                <p>Enter your email below and we will send you instructions to reset your password.</p>
+                <form action="/reset-password" method="POST">
+                    <input type="email" placeholder="Enter your email" name="resetEmail" required>
+                    <button type="submit">Send Reset Link</button>
+                    <p id="successMessage" style="color: green; display: none;">The reset link has been sent successfully!</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

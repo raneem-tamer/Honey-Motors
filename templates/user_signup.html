@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Sign Up | Honey Motors</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form action="{{ url_for('user_signup') }}" method="POST">
+                <h1>Create Account Using</h1>
+                <div class="social-icons">
+                    <a href="https://www.google.com" class="icon" target="_blank"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="https://www.facebook.com" class="icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://github.com" class="icon" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com" class="icon" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>OR use your email and create your account</span>
+                <input type="text" placeholder="Full Name" name="name" required>
+                <input type="email" placeholder="Email Address" name="email" required>
+                <input type="password" placeholder="Password" name="password" required>
+                <input type="text" placeholder="Phone Number" name="phone" required>
+                <select name="role" required>
+                    <option value="user">User</option>
+                    <option value="salesperson">Salesperson</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

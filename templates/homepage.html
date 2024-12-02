@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Motors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login & Register</a></li>
+                <li><a href="{{ url_for('vehicle') }}">Vehicle</a></li>
+                <li><a href="{{ url_for('about') }}">About & Help</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="card-container">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/911 GT3 RS.jpg') }}" alt="Porsche 911 GT3 RS">
+                <h3>Widow Maker</h3>
+                <p>Porsche 911 GT3 RS</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/ACR.jpg') }}" alt="Dodge Viper ACR">
+                <h3>King of the Ring</h3>
+                <p>Dodge Viper ACR</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/BUGATTI.jpg') }}" alt="Bugatti Chiron Super Sport">
+                <h3>Speed Demon</h3>
+                <p>Bugatti Chiron Super Sport</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/EB.jpg') }}" alt="Bugatti EB110">
+                <h3>Super Sport</h3>
+                <p>Bugatti EB110</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/AMG GT.jpg') }}" alt="AMG GT">
+                <h3>King of the Track</h3>
+                <p>Mercedes AMG GT</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/S600.jpg') }}" alt="Mercedes S600">
+                <h3>Ghost</h3>
+                <p>Mercedes S600</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/Pagani.jpg') }}" alt="Pagani Huayra">
+                <h3>Italian Beauty</h3>
+                <p>Pagani Huayra</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/Ford gt.jpg') }}" alt="Ford GT">
+                <h3>American Dream</h3>
+                <p>Ford GT</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/hellcat.jpg') }}" alt="Dodge Hellcat">
+                <h3>Pure Muscle</h3>
+                <p>Dodge Hellcat</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/amg one.jpg') }}" alt="AMG ONE">
+                <h3>Mega Car</h3>
+                <p>AMG ONE</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/gtr.jpg') }}" alt="GTR Nismo">
+                <h3>JDM</h3>
+                <p>GTR Nismo</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/toyota.jpg') }}" alt="Land Cruiser">
+                <h3>Off-Road</h3>
+                <p>Land Cruiser</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
+</body>
+</html>
