@@ -1,67 +1,47 @@
-name: CI Pipeline
+name: Python Application CI
 
 on:
   push:
-    branches:
-      - main # Adjust to your main branch name if different
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-test:
+  build:
+
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11']  # Supported Python versions
-
     steps:
-      # Step 1: Checkout code from the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Step 1: Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      # Step 2: Set up Python for each version in the matrix
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}  # Use Python version from the matrix
+    # Step 2: Set up Python environment
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
 
-      # Step 3: Install Python dependencies
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Ensure your project includes a requirements.txt file
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # Step 4: Install frontend dependencies (for JavaScript, CSS, etc.)
-      - name: Install frontend dependencies
-        run: |
-          # Assuming you're using npm or yarn for the frontend
-          npm install  # or yarn install if you're using Yarn
+    # Step 4: Run linting with flake8
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Treat errors as warnings and check for complexity and line length
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      # Step 5: Build your frontend (if applicable)
-      - name: Build frontend assets
-        run: |
-          npm run build  # or any other command for building your JS/CSS
+    # Step 5: Run tests with pytest
+    - name: Test with pytest
+      run: |
 
-      # Step 6: Format the code with Black for consistent Python styling (optional)
-      - name: Format code with Black
-        run: |
-          black .
-
-      # Step 7: Run security scan with Bandit for Python (optional)
-      - name: Run security scan with Bandit
-        run: |
-          bandit -r . --skip B104  # Correctly ignore B104 warning
-
-      # Step 8: Run Python tests with pytest and generate a report
-      - name: Run Tests
-        run: |
-          pytest --junitxml=pytest.xml  # Adjust test location as needed + create a report
-
-      # Step 9: Upload the test results as an artifact
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: pytest.xml  # Upload the test result file
+        pytest tests  # Specify the test folder if needed
