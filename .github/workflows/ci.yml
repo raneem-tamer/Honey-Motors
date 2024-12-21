@@ -3,7 +3,10 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main  # Replace with your main branch name if different
+      - main # Adjust to your main branch name if different
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-test:
@@ -24,28 +27,39 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}  # Use Python version from the matrix
 
-      # Step 3: Install project dependencies
+      # Step 3: Install Python dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # Ensure your project includes a requirements.txt file
 
-      # Step 4: Format the code with Black for consistent styling
+      # Step 4: Install frontend dependencies (for JavaScript, CSS, etc.)
+      - name: Install frontend dependencies
+        run: |
+          # Assuming you're using npm or yarn for the frontend
+          npm install  # or yarn install if you're using Yarn
+
+      # Step 5: Build your frontend (if applicable)
+      - name: Build frontend assets
+        run: |
+          npm run build  # or any other command for building your JS/CSS
+
+      # Step 6: Format the code with Black for consistent Python styling (optional)
       - name: Format code with Black
         run: |
           black .
 
-      # Step 5: Run security scan with Bandit and ignore B104 warning
+      # Step 7: Run security scan with Bandit for Python (optional)
       - name: Run security scan with Bandit
         run: |
           bandit -r . --skip B104  # Correctly ignore B104 warning
 
-      # Step 6: Run tests with pytest and generate a report
+      # Step 8: Run Python tests with pytest and generate a report
       - name: Run Tests
         run: |
           pytest --junitxml=pytest.xml  # Adjust test location as needed + create a report
 
-      # Step 7: Upload the test results as an artifact
+      # Step 9: Upload the test results as an artifact
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
