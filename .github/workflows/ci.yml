@@ -3,28 +3,62 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main  # Replace with your main branch name if it's different
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  # Using the latest Ubuntu runner
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11']  # Supported Python versions
 
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
-        uses: actions/checkout@v3  # Check out the repository code
+        uses: actions/checkout@v3
 
+      # Step 2: Set up Python environment based on the version matrix
       - name: Set up Python
-        uses: actions/setup-python@v4  # Set up Python environment
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  # Specify your desired Python version (e.g., 3.10)
+          python-version: ${{ matrix.python-version }}
 
+      # Step 3: Install project dependencies
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip  # Upgrade pip to the latest version
-          pip install -r requirements.txt  # Install dependencies from requirements.txt
+          python -m pip install --upgrade pip
+          pip install Flask>=2.0.0
+          pip install Flask-SQLAlchemy>=2.5.0
+          pip install python-dotenv>=0.21.0
+          pip install flask_login==0.6.2
+          pip install flask_wtf==1.1.1
+          pip install gunicorn==20.1.0
+          pip install pytest  # Adding pytest for testing
+          pip install black   # Adding black for code formatting
+          pip install bandit  # Adding bandit for security checks
 
+      # Step 4: Format code using Black
+      - name: Format code with Black
+        run: |
+          black .
+
+      # Step 5: Run security scan with Bandit
+      - name: Run security scan with Bandit
+        run: |
+          bandit -r .
+
+      # Step 6: Run tests using pytest
       - name: Run Tests
         run: |
-          pytest  # This assumes your test files are in the default location
-          # If your test files are in a folder named "tests", use:
-          # pytest tests/
+          pytest tests/ --junitxml=pytest.xml  # Adjust test location as necessary + generate test report
+
+      # Step 7: Upload test results as an artifact
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: pytest.xml
