@@ -1,0 +1,105 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Admin Container */
+.admin-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Action Buttons */
+.action-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px; /* Rounded edges for buttons */
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Vehicle Form */
+.vehicle-form {
+    margin-top: 20px;
+}
+
+.vehicle-form h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.vehicle-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Form Inputs and Select */
+.vehicle-form input, .vehicle-form select {
+    width: 100%;
+    padding: 10px; /* Increased padding for better readability */
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Buttons inside form */
+.vehicle-form button {
+    width: 48%;
+    margin-right: 1%;
+}
+
+/* Confirmation Message */
+#confirmation-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#confirmation-message button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745; /* Green confirmation button */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#confirmation-message button:hover {
+    background-color: #218838; /* Darker green on hover */
+}

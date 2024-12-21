@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>salSalesperson</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
+</head>
+<body>
+  <div class="admin-container">
+    <h1>Salesperson</h1>
+    <div class="action-buttons">
+      <button onclick="showAddForm()">Add Vehicle</button>
+      <button onclick="showUpdateForm()">Update Vehicle</button>
+      <button onclick="showDeleteForm()">Delete Vehicle</button>
+    </div>
+
+    <!-- Add Vehicle Form -->
+    <div id="add-vehicle-form" class="vehicle-form" style="display: none;">
+      <h2>Add New Vehicle</h2>
+      <form id="add-form">
+        <label for="make">Make:</label>
+        <input type="text" id="make" name="make" required>
+
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" required>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="fuel-type">Fuel Type:</label>
+        <select id="fuel-type" name="fuel-type">
+          <option value="Petrol">Petrol</option>
+          <option value="Diesel">Diesel</option>
+          <option value="Electric">Electric</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+
+        <label for="vehicle-image">Vehicle Image:</label>
+        <input type="file" id="vehicle-image" name="vehicle-image" accept="image/*">
+
+        <button type="button" onclick="addVehicle()">Add Vehicle</button>
+        <button type="button" onclick="cancelAction()">Cancel</button>
+      </form>
+    </div>
+
+    <!-- Update Vehicle Form -->
+    <div id="update-vehicle-form" class="vehicle-form" style="display: none;">
+      <h2>Update Vehicle</h2>
+      <form id="update-form">
+        <label for="select-vehicle">Select Vehicle:</label>
+        <select id="select-vehicle" onchange="loadVehicleDetails()">
+          <option value="" disabled selected>Select a vehicle</option>
+          <!-- Dynamically populated with vehicle listings -->
+        </select>
+
+        <label for="update-make">Make:</label>
+        <input type="text" id="update-make" name="make">
+
+        <label for="update-model">Model:</label>
+        <input type="text" id="update-model" name="model">
+
+        <label for="update-price">Price:</label>
+        <input type="number" id="update-price" name="price">
+
+        <label for="update-year">Year:</label>
+        <input type="number" id="update-year" name="year">
+
+        <label for="update-fuel-type">Fuel Type:</label>
+        <select id="update-fuel-type" name="fuel-type">
+          <option value="Petrol">Petrol</option>
+          <option value="Diesel">Diesel</option>
+          <option value="Electric">Electric</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+
+        <label for="update-vehicle-image">Update Vehicle Image:</label>
+        <input type="file" id="update-vehicle-image" name="update-vehicle-image" accept="image/*">
+
+        <button type="button" onclick="updateVehicle()">Update Vehicle</button>
+        <button type="button" onclick="cancelAction()">Cancel</button>
+      </form>
+    </div>
+
+    <!-- Delete Vehicle Form -->
+    <div id="delete-vehicle-form" class="vehicle-form" style="display: none;">
+      <h2>Delete Vehicle</h2>
+      <form id="delete-form">
+        <label for="delete-select">Select Vehicle:</label>
+        <select id="delete-select" onchange="confirmDelete()">
+          <option value="" disabled selected>Select a vehicle</option>
+          <!-- Dynamically populated with vehicle listings -->
+        </select>
+
+        <button type="button" onclick="deleteVehicle()">Delete Vehicle</button>
+        <button type="button" onclick="cancelAction()">Cancel</button>
+      </form>
+    </div>
+    
+    <!-- Confirmation Message -->
+    <div id="confirmation-message" style="display: none;">
+      <p>Vehicle listing has been successfully updated.</p>
+      <button onclick="hideConfirmation()">Close</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/sales.js') }}"></script>
+</body>
+</html>

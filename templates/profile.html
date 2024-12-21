@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Management</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+  
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('vehicle') }}">Vehicle</a></li>
+        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('purchase') }}">Purchase</a></li>
+        <li class="logout"><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Profile Management Section -->
+  <div class="profile-container">
+    <div class="profile-header">
+      <h1>User Profile</h1>
+      <button id="edit-btn" onclick="editProfile()">Edit Profile</button>
+    </div>
+    
+    <form id="profile-form" method="POST" style="display: none;">
+      <div id="edit-profile" class="edit-profile">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ user[0] }}" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ user[1] }}" required>
+
+        <label for="preferences">Preferences:</label>
+        <input type="text" id="preferences" name="preferences" value="{{ user[2] }}">
+
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+
+    <div id="profile-details" class="profile-details">
+      <p><strong>Name:</strong> <span id="user-name">{{ user[0] }}</span></p>
+      <p><strong>Email:</strong> <span id="user-email">{{ user[1] }}</span></p>
+      <p><strong>Preferences:</strong> <span id="user-preferences">{{ user[2] }}</span></p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+  
+</body>
+</html>

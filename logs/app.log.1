@@ -1,21 +1,4 @@
-Exception on /favicon.ico [GET]
-Traceback (most recent call last):
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 891, in dispatch_request
-    self.raise_routing_exception(req)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-
-During handling of the above exception, another exception occurred:
-
+Exception on /about [GET]
 Traceback (most recent call last):
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -24,15 +7,51 @@ Traceback (most recent call last):
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
                                                 ~^^^^^^^^^^^^^^^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
-    return self.handle_http_exception(e)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
-    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
-           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\appall.py", line 186, in page_not_found
-    return render_template('404.html'), 404
-           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\g.py", line 318, in about
+    return render_template('about.html')
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\jinja2\environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\jinja2\environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\jinja2\environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: about.html
+Exception on /admin-dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\g.py", line 181, in admin_dashboard
+    return render_template('admin_dashboard.html')
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 131, in _render
@@ -42,9 +61,9 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\templates\404.html", line 14, in top-level template code
-    <p>It seems you've encountered an error. You can go back to the <a href="{{ url_for('homepage') }}">Home</a> page.</p>
-    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\templates\admin_dashboard.html", line 26, in top-level template code
+    <a class="nav-link" href="{{ url_for('admin_user_management') }}">Admin User Management</a>
+    ^^^^^
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 1121, in url_for
     return self.handle_url_build_error(error, endpoint, values)
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -56,25 +75,8 @@ Traceback (most recent call last):
     )
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'homepage'. Did you mean 'help_page' instead?
-Exception on /favicon.ico [GET]
-Traceback (most recent call last):
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 891, in dispatch_request
-    self.raise_routing_exception(req)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 500, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-
-During handling of the above exception, another exception occurred:
-
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'admin_user_management'. Did you mean 'admin_login' instead?
+Exception on /vehicle [GET]
 Traceback (most recent call last):
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -83,15 +85,16 @@ Traceback (most recent call last):
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
                                                 ~^^^^^^^^^^^^^^^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 802, in handle_user_exception
-    return self.handle_http_exception(e)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 777, in handle_http_exception
-    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
-           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\appall.py", line 186, in page_not_found
-    return render_template('404.html'), 404
-           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\A.py", line 103, in vehicle
+    return render_template('vehicle.html', vehicles=vehicles)
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\templating.py", line 131, in _render
@@ -101,9 +104,9 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\templates\404.html", line 14, in top-level template code
-    <p>It seems you've encountered an error. You can go back to the <a href="{{ url_for('homepage') }}">Home</a> page.</p>
-    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Digital\Desktop\Phase1 Honey Motors\templates\vehicle.html", line 18, in top-level template code
+    <a href="{{ url_for('purchase') }}">Purchase</a>
+    ^^^^^^^^^^^^^
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\flask\app.py", line 1121, in url_for
     return self.handle_url_build_error(error, endpoint, values)
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,4 +118,4 @@ Traceback (most recent call last):
     )
   File "C:\Users\Digital\Desktop\Phase1 Honey Motors\venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'homepage'. Did you mean 'help_page' instead?
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'purchase'. Did you forget to specify values ['vehicle_id']?

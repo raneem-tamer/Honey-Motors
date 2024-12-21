@@ -1,4 +1,3 @@
-/* General Styles */
 body {
     font-family: 'Verdana', Geneva, sans-serif;
     margin: 0;
@@ -124,10 +123,22 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-right: 5px; /* Add some spacing between buttons */
+    margin-bottom: 5px; /* Add some spacing below buttons if needed */
 }
 
 button:hover {
     background-color: #555;
+}
+
+/*  If the buttons are inside a specific container, you can target that container */
+/*  For example, if your buttons are inside a div with class "button-group": */
+.button-group {
+    display: flex; /* Arrange items in a row */
+    gap: 10px;   /* Add spacing between buttons */
+    justify-content: flex-start; /* Or center, space-around, space-between */
+    align-items: center; /* Align items vertically in the center */
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line on smaller screens */
 }
 
 /* Media Queries for Responsiveness */
@@ -155,4 +166,5 @@ button:hover {
     .card-container {
         grid-template-columns: 1fr;
     }
+
 }

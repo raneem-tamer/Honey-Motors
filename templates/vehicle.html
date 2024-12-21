@@ -13,11 +13,13 @@
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
         </div>
         <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            
-            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
             <a href="{{ url_for('vehicle') }}">Vehicles</a>
-            <a href="{{ url_for('about') }}">About & Help</a>
+            <a href="{{ url_for('purchase') }}">Purchase</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="#" id="compareBtn">Compare Cars</a>
+            <a href="#" id="buildCarBtn">Build Your Car</a>
+            <a href="#" id="sellCarBtn">Sell Your Car</a>
         </nav>
     </header>
 
@@ -29,7 +31,22 @@
                 <option value="Toyota">Toyota</option>
                 <option value="Honda">Honda</option>
                 <option value="Ford">Ford</option>
+                <option value="BMW">BMW</option>
+                <option value="Nissan">Nissan</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="Mazda">Mazda</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Kia">Kia</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="Subaru">Subaru</option>
+                <option value="Jeep">Jeep</option>
+                <option value="Tesla">Tesla</option>
+                <option value="Jaguar">Jaguar</option>
+                <option value="Land Rover">Land Rover</option>
+                <option value="Porsche">Porsche</option>
             </select>
+
             <select id="priceFilter">
                 <option value="">All Prices</option>
                 <option value="0-10000">$0 - $10,000</option>
@@ -37,57 +54,162 @@
                 <option value="20000-30000">$20,000 - $30,000</option>
                 <option value="30000+">$30,000+</option>
             </select>
+
             <select id="yearFilter">
                 <option value="">All Years</option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
                 <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
             </select>
+
             <select id="fuelFilter">
                 <option value="">All Fuel Types</option>
                 <option value="Electric">Electric</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="Diesel">Diesel</option>
-                <option value="Gasoline">Gasoline</option>
+                <option value="Petrol">Petrol</option>
             </select>
-            <select id="typeFilter">
-                <option value="">All Types</option>
-                <option value="Sedan">Sedan</option>
-                <option value="SUV">SUV</option>
-                <option value="4x4">4x4</option>
-                <option value="Hatchback">Hatchback</option>
-                <option value="Coupe">Coupe</option>
+
+            <!-- Added Location Filter -->
+            <select id="locationFilter">
+                <option value="">All Locations</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Alexandria">Alexandria</option>
+                <option value="Giza">Giza</option>
+                <option value="Luxor">Luxor</option>
+                <option value="Aswan">Aswan</option>
+                <option value="Suez">Suez</option>
+                <option value="Fayoum">Fayoum</option>
+                <option value="Tanta">Tanta</option>
+                <option value="Sharm El Sheikh">Sharm El Sheikh</option>
+                <option value="Hurghada">Hurghada</option>
+                <option value="Asyut">Asyut</option>
+                <option value="Ismailia">Ismailia</option>
+                <option value="Dahab">Dahab</option>
+                <option value="Port Said">Port Said</option>
+                <option value="Zagazig">Zagazig</option>
             </select>
         </div>
 
         <div class="car-grid" id="carGrid">
-            <!-- Car cards will be dynamically added here -->
+
+        </div>
+
+    </div>
+
+    <div id="chatButton" class="chat-button">
+        <button onclick="toggleChatWindow()">💬</button>
+    </div>
+
+    <div id="chatWindow" class="chat-window">
+        <div class="chat-header">
+            <span>Chat with Us</span>
+            <button onclick="toggleChatWindow()">X</button>
+        </div>
+        <div id="chatBody" class="chat-body">
+            <!-- Predefined questions will be displayed here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-<!-- Chat Button -->
-<div id="chatButton" class="chat-button">
-    <button onclick="toggleChatWindow()">💬</button>
-</div>
 
-<!-- Chat Window (Hidden by Default) -->
-<div id="chatWindow" class="chat-window">
-    <div class="chat-header">
-        <span>Chat with Us</span>
-        <button onclick="toggleChatWindow()">X</button>
+    <!-- Compare Modal -->
+    <div id="compareModal" class="compare-modal">
+        <div class="compare-modal-content">
+            <div class="compare-modal-header">
+                <h2>Compare Cars</h2>
+                <span class="close-button" id="closeCompareModal">×</span>
+            </div>
+            <div class="compare-selectors">
+                <select id="car1Select">
+                    <option value="">Select Car 1</option>
+                </select>
+                <select id="car2Select">
+                    <option value="">Select Car 2</option>
+                </select>
+            </div>
+            <div class="compare-button-container">
+                <button id="compareAction">Compare</button>
+            </div>
+            <div class="comparison-results" id="comparisonResults">
+                <h3>Comparison Results</h3>
+                <div class="comparison-details">
+                    <div class="car-details" id="car1Details"></div>
+                    <div class="car-details" id="car2Details"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="chatBody" class="chat-body">
-        <!-- Predefined questions will be displayed here -->
+
+    <!-- Build Your Car Modal -->
+    <div id="buildCarModal" class="compare-modal">
+        <div class="compare-modal-content">
+            <div class="compare-modal-header">
+                <h2>Build Your Car</h2>
+                <span class="close-button" id="closeBuildCarModal">×</span>
+            </div>
+            <div class="build-car-form">
+                <div class="form-group">
+                    <label for="cylinders">Number of Cylinders:</label>
+                    <input type="number" id="cylinders" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="engineCapacity">Engine Capacity:</label>
+                    <input type="text" id="engineCapacity">
+                </div>
+                <div class="form-group">
+                    <label for="tireType">Tire Type:</label>
+                    <input type="text" id="tireType">
+                </div>
+                <div class="form-group">
+                    <label for="baseCar">Base Car:</label>
+                    <select id="baseCar">
+                        <option value="ferrari">Ferrari</option>
+                        <option value="dodge">Dodge</option>
+                        <option value="corvette">Corvette</option>
+                    </select>
+                </div>
+                <div class="build-button-container">
+                    <button id="buildAction">Build</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="chat-footer">
-        <input type="text" id="chatInput" placeholder="Type a message..." />
-        <button onclick="sendMessage()">Send</button>
+
+    <!-- Sell Your Car Modal -->
+    <div id="sellCarModal" class="compare-modal">
+        <div class="compare-modal-content">
+            <div class="compare-modal-header">
+                <h2>Sell Your Car</h2>
+                <span class="close-button" id="closeSellCarModal">×</span>
+            </div>
+            <div class="sell-car-form">
+                <div class="form-group">
+                    <label for="sellCarName">Car Name:</label>
+                    <input type="text" id="sellCarName">
+                </div>
+                <div class="form-group">
+                    <label for="sellCarModel">Car Model:</label>
+                    <input type="text" id="sellCarModel">
+                </div>
+                <div class="form-group">
+                    <label for="sellCarYear">Year of Manufacture:</label>
+                    <input type="number" id="sellCarYear">
+                </div>
+                <div class="sell-button-container">
+                    <button id="sellAction">Sell</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-
-
 
     <script src="{{ url_for('static', filename='js/vehicle.js') }}"></script>
-    
+
 </body>
 </html>

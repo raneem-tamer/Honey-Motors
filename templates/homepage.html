@@ -12,13 +12,13 @@
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
         </div>
         <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('login') }}">Login & Register</a></li>
-                <li><a href="{{ url_for('vehicle') }}">Vehicle</a></li>
-                <li><a href="{{ url_for('about') }}">About & Help</a></li>
+            
                 
-            </ul>
+                <a href="{{ url_for('login') }}">Login & Register</a>
+
+            
+                <a href="{{ url_for('about') }}">About & Help</a>
+            
         </nav>
     </header>
     <main>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Admin_User_Management.css') }}">
+</head>
+
+<!-- Header with Navbar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<body>
+    <div class="container">
+        <h1>User Management</h1>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Users will be added here using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Change Password</h2>
+            <form id="changePasswordForm">
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" required>
+                <button type="submit">Change Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/Admin_User_Management.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Vehicle</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/purchase.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Purchase Vehicle</h1>
+
+  </header>
+
+</div>
+<nav>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('vehicle') }}">Vehicles</a>
+    <a href="{{ url_for('purchase') }}">Purchase</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    
+</nav>
+</header>
+  <main>
+    <form id="purchaseForm" method="POST">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Your Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <h2>Vehicle Information</h2>
+      <label for="model">Model:</label>
+      <input type="text" id="model" name="model" required>
+
+      <label for="year">Year:</label>
+      <input type="number" id="year" name="year" required>
+
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" step="0.01" required>
+
+      <label for="fuel_type">Fuel Type:</label>
+      <input type="text" id="fuel_type" name="fuel_type" required>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" required>
+
+      <h2>Credit Card Details</h2>
+
+      <label for="cardNumber">Card Number:</label>
+      <input type="text" id="cardNumber" name="cardNumber" maxlength="16" pattern="[0-9]{16}" placeholder="1234 5678 9012 3456" required>
+
+      <label for="expiryDate">Expiry Date (MM/YY):</label>
+      <input type="text" id="expiryDate" name="expiryDate" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY" required>
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv" maxlength="3" pattern="[0-9]{3}" placeholder="123" required>
+
+      <button type="submit" class="buy-btn">Complete Purchase</button>
+    </form>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/purchase.js') }}"></script>
+</body>
+</html>

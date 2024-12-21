@@ -10,7 +10,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form action="/admin-login" method="POST">
+            <form action="{{ url_for('admin_login') }}" method="POST">
                 <h1>Admin Sign In</h1>
                 <div class="social-icons">
                     <a href="https://www.google.com" class="icon" target="_blank"><i class="fa-brands fa-google-plus-g"></i></a>

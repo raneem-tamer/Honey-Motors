@@ -1,0 +1,244 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Management API
+  description: API for managing vehicles, user profiles, and administrative tasks.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+paths:
+  # Public Routes
+  /:
+    get:
+      summary: Homepage
+      description: Displays the main homepage of the application.
+      responses:
+        '200':
+          description: Homepage loaded successfully.
+
+  /login:
+    get:
+      summary: Login Page
+      description: Displays the login page for users.
+      responses:
+        '200':
+          description: Login page loaded successfully.
+    post:
+      summary: User Login
+      description: Authenticates a user.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful.
+        '401':
+          description: Invalid credentials.
+
+  /logout:
+    get:
+      summary: User Logout
+      description: Logs out the currently authenticated user.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Logout successful.
+
+  /user-signup:
+    get:
+      summary: Signup Page
+      description: Displays the signup form for new users.
+      responses:
+        '200':
+          description: Signup page loaded successfully.
+    post:
+      summary: User Signup
+      description: Registers a new user.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+              required:
+                - name
+                - email
+                - phone
+                - password
+                - role
+      responses:
+        '201':
+          description: User registered successfully.
+
+  /contact:
+    get:
+      summary: Contact Page
+      description: Displays the contact form for inquiries.
+      responses:
+        '200':
+          description: Contact page loaded successfully.
+    post:
+      summary: Submit Contact Form
+      description: Sends a message through the contact form.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                message:
+                  type: string
+              required:
+                - name
+                - email
+                - message
+      responses:
+        '200':
+          description: Message sent successfully.
+
+  # User Routes
+  /profile:
+    get:
+      summary: Fetch User Profile
+      description: Retrieves the profile details of the logged-in user.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully.
+    post:
+      summary: Update User Profile
+      description: Updates the logged-in user's profile.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                preferences:
+                  type: string
+              required:
+                - name
+                - email
+      responses:
+        '200':
+          description: Profile updated successfully.
+
+  # Vehicle Routes
+  /vehicle:
+    get:
+      summary: Get All Vehicles
+      description: Fetches a list of all vehicles.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: List of vehicles retrieved successfully.
+    post:
+      summary: Get Vehicle by ID
+      description: Retrieves details of a specific vehicle by its ID.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                vehicle_id:
+                  type: string
+              required:
+                - vehicle_id
+      responses:
+        '200':
+          description: Vehicle details retrieved successfully.
+
+  # Admin Routes
+  /admin-login:
+    get:
+      summary: Admin Login Page
+      description: Displays the admin login form.
+      responses:
+        '200':
+          description: Admin login page loaded successfully.
+    post:
+      summary: Admin Login
+      description: Authenticates an admin user.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Admin login successful.
+
+  /admin-dashboard:
+    get:
+      summary: Admin Dashboard
+      description: Displays the admin dashboard for managing users, vehicles, and other system data.
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Admin dashboard loaded successfully.
+
+  # Purchase Routes
+  /purchase:
+    get:
+      summary: Purchase Page
+      description: Displays the purchase form.
+      responses:
+        '200':
+          description: Purchase page loaded successfully.
+
+securitySchemes:
+  cookieAuth:
+    type: apiKey
+    in: cookie
+    name: session
