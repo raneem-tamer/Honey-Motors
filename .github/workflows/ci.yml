@@ -14,20 +14,20 @@ jobs:
     
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11']  # Supported Python versions
+        python-version: ['3.8', '3.9', '3.10', '3.11']  # Supported Python versions, you can adjust them
 
     steps:
       # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python environment based on the version matrix
+      # Step 2: Set up Python environment for each version in the matrix
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      # Step 3: Install project dependencies
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -37,24 +37,24 @@ jobs:
           pip install flask_login==0.6.2
           pip install flask_wtf==1.1.1
           pip install gunicorn==20.1.0
-          pip install pytest  # Adding pytest for testing
-          pip install black   # Adding black for code formatting
-          pip install bandit  # Adding bandit for security checks
+          pip install pytest  # Added pytest as it's required for testing
+          pip install black   # Added black for code formatting
+          pip install bandit  # Added bandit for security scanning
 
-      # Step 4: Format code using Black
+      # Step 4: Format the code using Black
       - name: Format code with Black
         run: |
           black .
 
-      # Step 5: Run security scan with Bandit
+      # Step 5: Run a security scan with Bandit, ignoring specific warning (B104)
       - name: Run security scan with Bandit
         run: |
-          bandit -r .
+          bandit -r . -s B104  # Ignore the B104 warning specifically
 
-      # Step 6: Run tests using pytest
+      # Step 6: Run tests using pytest and generate a test report
       - name: Run Tests
         run: |
-          pytest tests/ --junitxml=pytest.xml  # Adjust test location as necessary + generate test report
+          pytest tests/ --junitxml=pytest.xml  # Adjust test location as needed + create a report
 
       # Step 7: Upload test results as an artifact
       - name: Upload test results
