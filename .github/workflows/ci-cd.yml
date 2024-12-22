@@ -1,3 +1,5 @@
+name: CI Workflow with Docker
+
 on:
   push:
     branches:
@@ -7,36 +9,32 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
         with:
-          python-version: '3.10'
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
-      - name: Install Dependencies
+      - name: Build and test Docker image
         run: |
-          python -m venv venv
-          . venv/bin/activate
-          pip install -r requirements.txt
+          docker build -t flask-app .
+          docker run --rm flask-app pytest tests/
 
-      - name: Run Tests
+      - name: Push Docker image to Docker Hub (optional)
+        if: github.ref == 'refs/heads/main'
         run: |
-          . venv/bin/activate
-          pytest --maxfail=1 --disable-warnings -q  # Optional: limit failures, disable warnings for cleaner output
-
-      - name: Build Docker Image
-        run: docker build -t honey-motors .
-
-      - name: Deploy to Azure
-        uses: azure/docker-login@v1
-        with:
-          login-server: honeymotors.azurecr.io
-          username: ${{ secrets.AZURE_USERNAME }}
-          password: ${{ secrets.AZURE_PASSWORD }}
-
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker tag flask-app:latest raneem22/flask-app:latest
+          docker push raneem22/flask-app:latest

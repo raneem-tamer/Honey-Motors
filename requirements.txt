@@ -6,3 +6,4 @@ Flask-Swagger-UI
 Werkzeug
 PyMySQL
 pytest
+mysqlclient==2.2.6
